@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
+body{
+  font-family: 'Rubik',sans-serif;
+}
+
+#logo{
+  width: 2.8rem;
+}
+
+.navbar-toggler{
+  border: none;
+  outline: none;
+}
+
+.fa-bars,
+.fa-shopping-bag,
+.nav-link{
+  color: var(--teal) !important;
+}
+
+/*custom button*/
+.btn-outline-teal{
+  border: 2px solid var(--teal);
+  background-color: var(--white);
+  color: var(--teal);
+  transition: all 0.2s linear;
+}
+
+.btn-outline-teal:hover{
+  border-color: var(--white);
+  color: var(--white);
+  background-color: var(--teal);
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.card > img {
+  object-fit: contain;
+  height: 12rem;
+  margin-top: 1rem;
+}
+
+.modal-header{
+  border-bottom: 0;
+  padding: 0.5rem 1rem;
+}
+
+.modal-footer{
+  border-top: 0;
+}
+
+.modal-body img{
+  width: 99%;
+  object-fit: contain;
+  height: 26rem;
+}

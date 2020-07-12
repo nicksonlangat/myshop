@@ -1,0 +1,114 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+      integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Bikey-Matt ~Quality bikes at unbeatable prices!</title>
+  </head>
+  <header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <img id="logo" src="{% static 'icon/bike.png' %}" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navlinks">
+<span class="fas fa-bars"></span>
+</button>
+      <div class="collapse navbar-collapse justify-content-end" id="navlinks">
+        <ul class="navbar-nav text-center font-weight-bold">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item ml-1">
+            <a href="#" class="nav-link">Products</a>
+          </li>
+          <li class="nav-item ml-1">
+            <a href="#" class="nav-link">About</a>
+          </li>
+          <li class="nav-item ml-1">
+            <a href="{% url 'cart:cart_detail' %}" class="nav-link"><i class="fas fa-shopping-bag"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+  <body>
+<main>
+  <div class="container my-2">
+    <div class="row">
+      {% for bike in bicycles %}
+      <div class="col-sm-12 col-md-6 col-lg-4">
+           <article class="card my-3 shadow-sm" data-id="{{bike.id}}">
+             <img class="card-img-top" src="{{bike.image.url}}" alt="{{bike.name}}">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+               <h5 class="card-title">{{bike.name}}</h5>
+               <h5 class="card-text">$ {{bike.price}}</h5>
+             </div>
+             <button type="button" class="btn btn-block btn-outline-teal mt-1" tabindex="-1" data-toggle="modal" data-target="#modal-{{bike.id}}">
+             <i class="far fa-eye"></i> Quick View</button>
+            </div>
+          </article>
+             <div class="modal fade" id="modal-{{bike.id}}">
+              <div class="modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-12 col-lg-5">
+                        <img src="{{bike.image.url}}" alt="{{bike.name}}">
+                      </div>
+                      <div class="col-12 col-lg-7">
+                        <article class="px-2">
+                          <h2 class="mt-2">{{bike.name}}</h2>
+                          <h3 class="mt-2">{{bike.name}}</h3>
+                          <p>{{bike.description}}</p>
+                          <form  action='{% url "cart:cart_add" bike.id %}' method="post" class="mt-2 d-flex align-content-center">
+                            {% csrf_token %}
+                            <input type="number" id="id_quantity" name="quantity" class="w-25 form-control" min="1">
+                            <button class="ml-2 btn btn-outline-teal">
+                            <i class="fas fa-shopping-bag"></i>
+                             Add to Cart</button>
+                          </form>
+                        </article>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+                </div>
+              </div>
+              </div>
+        </div>
+       {% endfor %}
+    </div>
+  </div>
+</main>
+<footer class="bg-light py-2">
+  <p class="text-center text-muted my-2">Made by <a href="http://nickyadams.pythonanywhere.com" target="-blank">Bike-Guru</a></p>
+</footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
